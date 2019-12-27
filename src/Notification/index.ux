@@ -92,21 +92,21 @@ export default {
                 {
                     iconPath: '/images/message.png',
                     selectedIconPath: '/images/message_d.png',
-                    pagePath: '/pages/tabbar',
+                    pagePath: '/Notification',
                     text: '通知',
                     active: true
                 },
                 {
                     iconPath: '/images/device.png',
                     selectedIconPath: '/images/device_d.png',
-                    pagePath: '/pages/tabbar/page1',
+                    pagePath: '/Device',
                     text: '设备',
                     active: false
                 },
                 {
                     iconPath: '/images/person.png',
                     selectedIconPath: '/images/person_d.png',
-                    pagePath: '/pages/tabbar/page2',
+                    pagePath: '/Person',
                     text: '个人',
                     active: false
                 }
