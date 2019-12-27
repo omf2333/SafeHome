@@ -52,7 +52,7 @@ export default {
                 {
                     iconPath: '/images/device.png',
                     selectedIconPath: '/images/device_d.png',
-                    pagePath: '/DemoDetail',
+                    pagePath: '/Device',
                     text: '设备',
                     active: false
                 },

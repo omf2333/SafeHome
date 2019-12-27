@@ -25,15 +25,9 @@
     "logLevel": "off"
   },
   "router": {
-    "entry": "Notification",
+    "entry": "Device",
     "pages": {
-      "Demo": {
-        "component": "index"
-      },
-      "DemoDetail": {
-        "component": "index"
-      },
-      "About": {
+      "Device": {
         "component": "index"
       },
       "Person": {
@@ -73,18 +67,14 @@
     "titleBarBackgroundColor": "#fefeff",
     "titleBarTextColor": "#414141",
     "pages": {
-      "Demo": {
-
-        "menu": false
-      },
-      "DemoDetail": {
+      "Notification": {
         "titleBar":false
       },
-      "Person": {
+      "Device": {
         "titleBar":false
       },
-      "About": {
-        "menu": false
+      "Person":{
+        "titleBar":false
       }
     }
   }
