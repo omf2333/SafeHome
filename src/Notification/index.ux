@@ -136,7 +136,6 @@ export default {
 </script>
 
 <style lang="less">
- @import '../color.css';
   .demo-page{
       flex-direction: column;
   }
