@@ -25,7 +25,7 @@
     "logLevel": "off"
   },
   "router": {
-    "entry": "Demo",
+    "entry": "Person",
     "pages": {
       "Demo": {
         "component": "index"
@@ -35,6 +35,9 @@
       },
       "About": {
         "component": "index"
+      },
+      "Person": {
+        "component":"index"
       }
     },
     "widgets": {
@@ -52,16 +55,18 @@
     }
   },
   "display": {
-    "titleBarBackgroundColor": "#f2f2f2",
+    "titleBarBackgroundColor": "#fefeff",
     "titleBarTextColor": "#414141",
-    "menu": true,
     "pages": {
       "Demo": {
-        "titleBarText": "示例页",
+
         "menu": false
       },
       "DemoDetail": {
-        "titleBarText": "详情页"
+        "titleBar":false
+      },
+      "Person": {
+        "titleBar":false
       },
       "About": {
         "menu": false

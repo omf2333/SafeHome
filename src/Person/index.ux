@@ -1,0 +1,132 @@
+<import name="my-tabbar" src="apex-ui/components/tabbar/index"></import>
+<template>
+  <div class="me-page">
+    <div class = "person-bar">
+      <image src={{avaterPath}} class="avater"></image>
+      <text class ="userName">{{username}}</text>
+    </div>
+    <div class="part1-container">
+       <block  for="{{case in part1ListData}}">
+        <div class="item-li" onclick="routePath(case.path, {})">
+            <image src={{case.img}} class="item-icon"  ></image>
+            <text class="item-li-detail">{{case.name}}</text>
+            <image class="item_arrow_img" src="./images/arrow2.png"></image>
+        </div>
+      </block>
+    </div>
+    <div class="part1-container">
+       <block  for="{{case in part2ListData}}">
+        <div class="item-li" onclick="routePath(case.path, {})">
+            <image src={{case.img}} class="item-icon"  ></image>
+            <text class="item-li-detail">{{case.name}}</text>
+            <image class="item_arrow_img" src="./images/arrow2.png"></image>
+        </div>
+      </block>
+    </div>
+    <my-tabbar tabbar="{{tabbarData}}"></my-tabbar>
+  </div>
+</template>
+
+
+<script>
+
+export default {
+  private: {
+    username:"蔡振东",
+    avaterPath:"./images/avater.jpg",
+    part1ListData: [{name:'设置',img:'./images/setting1.png'},
+      {name:'用户协议',img:'./images/safe.png'}],
+
+    part2ListData: [{name:'使用教程',img:'./images/teach.png'},
+      {name:'常见问题',img:'./images/question.png'},
+      {name:'意见反馈',img:'./images/feedback.png'},
+      {name:'关于',img:'./images/about.png'}],
+      tabbarData: [
+                {
+                    iconPath: '/images/message.png',
+                    selectedIconPath: '/images/message_d.png',
+                    pagePath: '/pages/tabbar',
+                    text: '通知',
+                    active: false
+                },
+                {
+                    iconPath: '/images/device.png',
+                    selectedIconPath: '/images/device_d.png',
+                    pagePath: '/DemoDetail',
+                    text: '设备',
+                    active: false
+                },
+                {
+                    iconPath: '/images/person.png',
+                    selectedIconPath: '/images/person_d.png',
+                    pagePath: '/person',
+                    text: '个人',
+                    active: true
+                }
+            ],
+  }
+}
+</script>
+
+<style>
+.me-page{
+  background-color: #eeeeee;
+  flex-direction: column;
+}
+.person-bar{
+  flex-direction: column;
+  height: 280px;
+  background-image: url(./images/title.jpg);
+  align-items: center;
+}
+.avater{
+    margin-top: 80px;
+    height: 100px;
+    width: 100px;
+    border-radius:50%;
+    border:3px solid #eee; 
+}
+.userName{
+  margin-top: 10px;
+  color: #ffffff;
+  font-size: 35px;
+}
+
+.part1-container {
+    background-color: #ffffff;
+    flex-direction: column;
+    margin-bottom: 10px;
+}
+  .item-title-detail {
+    flex: 1;
+    color: #000000;
+  }
+  .item-title-detail:active {
+    background-color: #dfdfdf;
+  }
+
+  .item-li {
+    border-color: #bbbbbb;
+    border-bottom-width: 1px;
+    align-items: center;
+    padding-bottom: 15px;
+    padding-top: 15px;
+  }
+  .item-li:active {
+    background-color: #dfdfdf;
+  }
+  .item_arrow_img {
+    height: 40px;
+    width: 20px;
+    margin-right: 20px;
+    object-fit: contain;
+  }
+  .item-li-detail {
+    margin-left: 10px;
+    color: #000000;
+    flex: 1;
+  }
+  .item-icon{
+    margin-left: 15px;
+  }
+</style>

@@ -1,22 +1,26 @@
 <import name="my-tabbar" src="apex-ui/components/tabbar/index"></import>
+<import name='titleBar' src='./ux-titleBar'></import>
 <template>
   <!-- template里只能有一个根节点 -->
-  <div class="demo-page">
+  <div class="device-list-page">
+  <div class="tileBarItem">
+      <titleBar show="true"
+                title="家庭设备"
+                onright-button-clicked="onRightButtonClicked"
+                background-color = "#FEFEFF"
+                text-color = "#333333"
+                right-button="./images/add_device1.png"></titleBar>
+  </div>
+  <image src='./images/bar.png' class="bar"  ></image>
   <list class="list-content" onscroll="handleScroll" onscrollbottom="scrollbottom" id="list"
       onscrolltouchup="scrolltouchup" onscrollend="scrollend" scrollpage="{{scrollPage}}"
       style="columns:{{columnsNum}}">
       <!-- 列表元素，属性type值相同时，需要确保渲染中dom结构相同 -->
       <list-item type="listItem" class="item item-color" for="{{listData}}">
         <div class="item-content-with-height">
-          <image src={{$item.img}} class="fixed-size-h" style="object-fit: scale-down"></image>
+          <image src={{$item.img}} class="device-icon"  ></image>
+          <text class="device-name">{{$item.name}}</text>
         </div>
-        <text class="txt">{{$item.name}}</text>
-      </list-item>
-
-      <!-- 加载更多 -->
-      <list-item type="loadMore" class="load-more" if="{{loadMore}}" style="column-span:{{columnsNum}}">
-        <progress type="circular"></progress>
-        <text>加载更多</text>
       </list-item>
   </list>
     <my-tabbar tabbar="{{tabbarData}}"></my-tabbar>
@@ -24,17 +28,19 @@
 </template>
 
 <script>
+import prompt from '@system.prompt'
 export default {
   private: {
     componentName: 'list',
     loadMore: true,
-    listAdd: [{name:'感烟探测器',img:'./images/message.png'},
-      {name:'温度传感器',img:'./images/message.png'},
-      {name:'智能摄像头',img:'./images/message.png'},
-      {name:'运动传感器',img:'./images/message.png'},
-      {name:'红外传感器',img:'./images/message.png'}],
+    listAdd: [{name:'智能摄像头组',img:'./images/sensor-camera.png'},
+      {name:'感烟探测器组',img:'./images/sensor-smoke.png'},
+      {name:'气体检测器组',img:'./images/sensor-gas.png'},
+      {name:'红外传感器组',img:'./images/sensor-infrared.png'},
+      {name:'温度传感器组',img:'./images/sensor-temperature.png'},
+      {name:'门窗传感器组',img:'./images/sensor-windows-open-closed.png'}],
     listData: [],
-    scrollPage: false,
+    scrollPage: true,
     showListBtn: true,
     listClass: 'selected',
     arrayClass: '',
@@ -46,19 +52,19 @@ export default {
                     selectedIconPath: '/images/message_d.png',
                     pagePath: '/pages/tabbar',
                     text: '通知',
-                    active: true
+                    active: false
                 },
                 {
                     iconPath: '/images/device.png',
                     selectedIconPath: '/images/device_d.png',
-                    pagePath: '/pages/tabbar/page1',
+                    pagePath: '/DemoDetail',
                     text: '设备',
-                    active: false
+                    active: true
                 },
                 {
                     iconPath: '/images/person.png',
                     selectedIconPath: '/images/person_d.png',
-                    pagePath: '/pages/tabbar/page2',
+                    pagePath: '/person',
                     text: '个人',
                     active: false
                 }
@@ -72,10 +78,8 @@ export default {
     this.$app.$def.showMenu()
   },
   onInit() {
-      this.$page.setTitleBar({ text: 'List' })
       // 初始化列表数据
       this.listData = [].concat(this.listAdd)
-      this.$page.setTitleBar({ text: 'List' })
   },
   showListMethod() {
       if (!this.showListBtn) {
@@ -84,38 +88,62 @@ export default {
         this.arrayClass = ''
     }
   },
+  onRightButtonClicked () {
+      prompt.showToast({
+        message: 'rightButtonClicked'
+      })
+    },
 }
 </script>
 
 <style lang="less">
+  .device-list-page{
+     background-color:#EEEEEE;
+    flex-direction: column;
+  }
+  .tileBarItem{
+    margin-top: 10px;
+  }
+  .bar{
+    margin-left: 22px;
+    margin-right: 22px;
+    margin-top: 15px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+  }
   .list-content {
     flex: 1;
-    padding-left: 60px;
-    padding-right: 60px;
+    padding-left: 15px;
+    padding-right: 15px;
   }
 
   .item {
-    height: 150px;
+    height: 160px;
+
     align-items: center;
     justify-content: center;
     margin-bottom: 15px;
-    margin-left: 10px;
-    margin-right: 10px;
-  }
+    margin-left: 7px;
+    margin-right: 7px;
+    padding: 10px;
+    border-radius: 7px;
+    border-width:1;
+    border-color: #dcdcdc;
+    .item-content-with-height{
+      flex-direction: column;
+      align-items: center;
+      .device-icon {
+        height: 84px;
+        width: 84px;     
+      }
+      .device-name{
+         margin-top: 10px;
+         font-size: 20px;
+         color:#808080;
+      }
+    }
+  
 
-  .input-number-wrap {
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    padding-left: 60px;
-    padding-right: 60px;
-    padding-bottom: 50px;
-  }
-
-  .input-number {
-    flex: 1;
-    margin-left: 50px;
-    font-size: 30px;
   }
 
   .load-more {
@@ -126,51 +154,8 @@ export default {
     border-bottom-width: 1px;
   }
 
-  .btn-wrap-column {
-    flex-direction: column;
-    margin-right: 60px;
-    margin-left: 60px;
-  }
-
-  .btn-wrap-row {
-    margin-right: 60px;
-    margin-left: 45px;
-    margin-bottom: 30px;
-  }
-
-  .btn-little {
-    flex: 1;
-    height: 80px;
-    margin-left: 15px;
-    border-radius: 5px;
-    color: #ffffff;
-    font-size: 30px;
-    text-align: center;
-    border-width: 0px;
-    background-color: #0faeff;
-  }
-
   .item-color {
-    background-color: #f76160;
+    background-color:#ffffff;
   }
 
-  .nav {
-    padding-left: 60px;
-    padding-right: 60px;
-    padding-bottom: 30px;
-  }
-
-  .nav-item {
-    flex: 1;
-    padding-bottom: 30px;
-    border-bottom-width: 5px;
-    border-color: #fbf9fe;
-    font-size: 35px;
-    color: #666666;
-    text-align: center;
-  }
-
-  .selected {
-    border-color: #0faeff;
-  }
 </style>
