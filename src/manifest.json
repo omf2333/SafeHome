@@ -25,7 +25,7 @@
     "logLevel": "off"
   },
   "router": {
-    "entry": "Demo",
+    "entry": "Notification",
     "pages": {
       "Demo": {
         "component": "index"
@@ -34,6 +34,9 @@
         "component": "index"
       },
       "About": {
+        "component": "index"
+      },
+      "Notification": {
         "component": "index"
       }
     },
@@ -48,6 +51,18 @@
           "vivo"
         ],
         "features": []
+      },
+      "card": {
+        "name": "ddd",
+        "description": "wdd",
+        "component": "ddd",
+        "path": "/card",
+        "features": [
+          {
+            "name": "system.network"
+          }
+        ],
+        "minPlatformVersion": 1060
       }
     }
   },
