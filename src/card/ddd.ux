@@ -1,0 +1,64 @@
+<template>
+  <div class="card">
+    <div class="nav">
+      <div class="nav-item">
+        <image class="preview"></image>
+        <text class="name">功能名</text>
+      </div>
+      <div class="nav-item">
+        <image class="preview"></image>
+        <text class="name">功能名</text>
+      </div>
+      <div class="nav-item">
+        <image class="preview"></image>
+        <text class="name">功能名</text>
+      </div>
+    </div>
+  </div>
+</template>
+
+<style>
+.card {
+  flex-direction: column;
+  height: 240px;
+  width: 100%;
+  padding: 35px;
+  background-color: #E4EAF0;
+  border-radius: 25px;
+}
+
+.nav {
+  height: 176px;
+  width: 663px;
+  padding-top: 18px;
+}
+.nav-item {
+  width: 225px;
+  height: 176px;
+  flex-direction: column;
+  align-items: center;
+}
+.preview {
+  height: 88px;
+  width: 88px;
+  border-radius: 44px;
+  margin-bottom: 8px;
+  background-color: #D0D7DE;
+}
+.name {
+  width: 225px;
+  height: 35px;
+  line-height: 35px;
+  font-size: 25px;
+  color: rgba(0,0,0,0.80);
+  text-align: center;
+}
+</style>
+
+<script>
+export default {
+  private: {
+    title: '卡片示例'
+  }
+}
+</script>

@@ -1,0 +1,302 @@
+
+
+<import name="my-tabbar" src="apex-ui/components/tabbar/index"></import>
+<template>
+  <!-- template里只能有一个根节点 -->
+  <div class="demo-page">
+         <list style="background-color:#fff;">
+        <div class="top-display">
+ 
+         <text style="text-align:center; margin-left:50px;margin-top:180px;margin-right:80px;font-size:36px;font-weight:bold;color:#fefeff">已安全守卫23天</text>
+     
+         <list class="list-content" 
+      style="columns:{{columnsNum}};">
+      <!-- 列表元素，属性type值相同时，需要确保渲染中dom结构相同 -->
+      <list-item type="listItem" class="item item-color" for="{{listData}}">
+        <div style="flex-direction:column;">  
+        <text class="top-text">{{$item.name}}</text>
+         <text class="bottom-text">{{$item.count}}</text>
+        </div> 
+      </list-item>
+         </list>
+             <!-- <image style="width:100%" src="../images/guodu.png"></image> -->
+        </div>
+ 
+             <div class="notification-no">
+                  </div>
+         <list-item type="notification" class="content-item" for="{{notificationData}}">
+             <div class="notification-cl">
+                <image if="{{$item.warnLevel==1}}" class="notification-level" src="../images/danger.png"></image>
+                <image elif="{{$item.warnLevel==2}}" class="notification-level" src="../images/warn.png"></image>
+                <image else class="notification-level" src="../images/sage.png"></image>
+                <div style="flex-direction:column;flex:20;">
+                    <div style="flex-direction:row">
+                        <text class="notification-title">{{$item.event}}</text>
+                        <text class="notification-date">{{$item.date}}</text>
+                    </div>
+                    <text class="notification-pos">位置: {{$item.position}}</text>
+                </div>
+   
+        <div>
+      </list-item>
+    </list>
+     
+    <my-tabbar tabbar="{{tabbarData}}"></my-tabbar>
+  </div>
+</template>
+
+<script>
+export default {
+  private: {
+    componentName: 'list',
+    loadMore: true,
+    listAdd: [{name:'温度',count:"4.9"},
+      {name:'空气状况',count:"良好"},
+      {name:'设备个数',count:"5"},
+            ],
+    listData: [],
+    scrollPage: false,
+    showListBtn: true,
+    listClass: 'selected',
+    arrayClass: '',
+    columnsNum: 3,
+    columnsNumNew: 0,
+    notificationData:[
+        {
+            event:"异常摔倒",
+            warnLevel:1,
+            position:"摄像头1",
+            date:"今天 10:23"  
+        },
+        {
+            event:"异常摔倒",
+            warnLevel:2,
+            position:"摄像头1",
+            date:"今天 10:23"  
+        },
+        {
+            event:"异常摔倒",
+            warnLevel:3,
+            position:"摄像头1",
+            date:"今天 10:23"  
+        },
+        {
+            event:"异常摔倒",
+            warnLevel:1,
+            position:"摄像头1",
+            date:"今天 10:23"  
+        },
+    ],
+
+    tabbarData: [
+                {
+                    iconPath: '/images/message.png',
+                    selectedIconPath: '/images/message_d.png',
+                    pagePath: '/pages/tabbar',
+                    text: '通知',
+                    active: true
+                },
+                {
+                    iconPath: '/images/device.png',
+                    selectedIconPath: '/images/device_d.png',
+                    pagePath: '/pages/tabbar/page1',
+                    text: '设备',
+                    active: false
+                },
+                {
+                    iconPath: '/images/person.png',
+                    selectedIconPath: '/images/person_d.png',
+                    pagePath: '/pages/tabbar/page2',
+                    text: '个人',
+                    active: false
+                }
+            ]
+  },
+  /**
+   * 当用户点击菜单按钮时触发，调用app中定义的方法showMenu
+   * 注意：使用加载器测试`创建桌面快捷方式`功能时，请先在`系统设置`中打开`应用加载器`的`桌面快捷方式`权限
+   */
+  onMenuPress() {
+    this.$app.$def.showMenu()
+  },
+  onInit() {
+      this.$page.setTitleBar({ text: 'List' })
+      // 初始化列表数据
+      this.listData = [].concat(this.listAdd)
+      this.$page.setTitleBar({ text: 'List' })
+  },
+  showListMethod() {
+      if (!this.showListBtn) {
+        this.showListBtn = true
+        this.listClass = 'selected'
+        this.arrayClass = ''
+    }
+  },
+}
+</script>
+
+<style lang="less">
+ @import '../color.css';
+  .demo-page{
+      flex-direction: column;
+  }
+
+  .top-display{
+      width: 100%;
+      height: 470px;
+      background-image:url("../images/bb.png");
+      flex-direction: column;
+  }
+  .container{
+      width: 100%;
+  }
+
+  .notification-cl{
+      width: 95%;
+      margin: 15px;
+      margin-top:0px;
+      margin-left:20px;
+      border-radius: 10px;
+      background-color: #fefeff;
+      border: 3px solid #eee;
+      justify-content: center;
+      align-content: center;
+  }
+
+
+  .list-content {
+    margin-top: 30px;
+    flex: 1;
+    padding-left: 60px;
+    padding-right: 60px;
+  }
+
+  .item {
+    height: 130px;
+    align-items: center;
+    justify-content: center;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top:20px;
+    border-radius: 15px;
+  }
+  
+  .notification-level{
+      flex:1;
+      font-weight: bold;
+      font-size: 30px;
+      margin:20px;
+  }
+
+  .notification-title{
+      margin:20px;
+      margin-left:0px;
+      font-size: 30px;
+      flex:5;
+   
+  }
+  .notification-date{
+      margin:20px;
+      margin-left:30px;
+      font-size: 24px;
+      color: #888;
+      flex:2
+  }
+  .notification-pos{
+      margin:20px;
+      margin-top:0px;
+      margin-left:0px;
+      font-size: 24px;
+      color: #888;
+  }
+  
+
+  .top-text{
+      text-align: center;
+      margin: 5px;
+      margin-top: 0;
+      font-family: fantasy;
+  }
+
+  .bottom-text{
+      text-align: center;
+      font-weight: bold;
+      font-size: 30px;
+      margin: 5px;
+
+  }
+
+
+
+  .input-number-wrap {
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding-left: 60px;
+    padding-right: 60px;
+    padding-bottom: 50px;
+  }
+
+  .input-number {
+    flex: 1;
+    margin-left: 50px;
+    font-size: 30px;
+  }
+
+  .load-more {
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+    border-color: #bbbbbb;
+    border-bottom-width: 1px;
+  }
+
+  .btn-wrap-column {
+    flex-direction: column;
+    margin-right: 60px;
+    margin-left: 60px;
+  }
+
+  .btn-wrap-row {
+    margin-right: 60px;
+    margin-left: 45px;
+    margin-bottom: 30px;
+  }
+
+  .btn-little {
+    flex: 1;
+    height: 80px;
+    margin-left: 15px;
+    border-radius: 5px;
+    color: #ffffff;
+    font-size: 30px;
+    text-align: center;
+    border-width: 0px;
+    background-color: #0faeff;
+  }
+
+  .item-color {
+    background-color: #f5deb3;
+    opacity: 0.9;
+  }
+
+  .nav {
+    padding-left: 60px;
+    padding-right: 60px;
+    padding-bottom: 30px;
+  }
+
+  .nav-item {
+    flex: 1;
+    padding-bottom: 30px;
+    border-bottom-width: 5px;
+    border-color: #fbf9fe;
+    font-size: 35px;
+    color: #666666;
+    text-align: center;
+  }
+
+  .selected {
+    border-color: #0faeff;
+  }
+</style>
