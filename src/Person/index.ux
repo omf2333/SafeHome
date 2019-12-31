@@ -45,7 +45,7 @@ export default {
                 {
                     iconPath: '/images/message.png',
                     selectedIconPath: '/images/message_d.png',
-                    pagePath: '/pages/tabbar',
+                    pagePath: '/Notification',
                     text: '通知',
                     active: false
                 },
@@ -59,7 +59,7 @@ export default {
                 {
                     iconPath: '/images/person.png',
                     selectedIconPath: '/images/person_d.png',
-                    pagePath: '/person',
+                    pagePath: '/Person',
                     text: '个人',
                     active: true
                 }
